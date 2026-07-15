@@ -7,11 +7,10 @@ import { CloseBlock } from "@/components/close-block";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { SiteImageBlock } from "@/components/ui/site-image";
 import { ProcessSequence } from "@/components/process-sequence";
+import { LevelImageSwitcher } from "@/components/level-image-switcher";
 import { MAKER_ROUTES } from "@/data/maker-routes";
-import { LEVEL_ACCENT_CLASSES } from "@/data/levels";
-import { CONTENT_ICONS } from "@/components/icons";
 import { MAKER_DISTRICT_INTRO } from "@/data/site";
-import { IMAGES } from "@/data/images";
+import { IMAGES, EVIDENCE_IMAGES } from "@/data/images";
 import { evidencesForLevel } from "@/data/evidence";
 import { buildMetadata } from "@/lib/seo";
 
@@ -23,20 +22,27 @@ const LEVEL_SNAPSHOTS = [
     name: "Inicial",
     description: "Experiencias Maker seguras, adecuadas a la edad y siempre supervisadas.",
     icon: "shield" as const,
+    image: IMAGES.distritoMakerLevels.inicial,
   },
   {
     slug: "primaria" as const,
     name: "Primaria",
     description: "Dos experiencias Maker por semana, dentro del horario regular.",
     icon: "calendar" as const,
+    image: IMAGES.distritoMakerLevels.primaria,
   },
   {
     slug: "secundaria" as const,
     name: "Secundaria",
     description: "Exploración de las cuatro rutas en 1.°–3.°, especialización desde 4.°.",
     icon: "compass" as const,
+    image: IMAGES.distritoMakerLevels.secundaria,
   },
 ];
+
+// La evidencia con foto de la ruta Diseño se excluye aquí: esa misma foto
+// ya se usa como imagen de la tarjeta de la ruta Diseño en esta página.
+const ROUTE_EVIDENCES = evidencesForLevel("secundaria").filter((e) => e.image !== EVIDENCE_IMAGES.M);
 
 export default function DistritoMakerPage() {
   return (
@@ -53,23 +59,9 @@ export default function DistritoMakerPage() {
           title="Cómo se vive en cada nivel"
           description="La misma lógica, adaptada a cada edad: en Inicial es exploración segura; en Primaria, dos experiencias semanales; en Secundaria, rotación y luego especialización."
         />
-        <div className="grid gap-4 sm:grid-cols-3">
-          {LEVEL_SNAPSHOTS.map((level, i) => {
-            const accent = LEVEL_ACCENT_CLASSES[level.slug];
-            const Icon = CONTENT_ICONS[level.icon];
-            return (
-              <ScrollReveal key={level.slug} delay={i * 70}>
-                <div className={`rounded-md border border-border border-t-2 bg-white p-5 ${accent.borderTop}`}>
-                  <span className={`flex h-10 w-10 items-center justify-center rounded-md ${accent.bg} ${accent.text}`}>
-                    <Icon />
-                  </span>
-                  <p className={`mt-3 font-semibold ${accent.text}`}>{level.name}</p>
-                  <p className="mt-2 text-sm text-text-secondary">{level.description}</p>
-                </div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
+        <ScrollReveal>
+          <LevelImageSwitcher levels={LEVEL_SNAPSHOTS} />
+        </ScrollReveal>
       </Section>
 
       <Section surface>
@@ -121,7 +113,7 @@ export default function DistritoMakerPage() {
       <Section>
         <SectionHeading eyebrow="Qué producen los estudiantes" title="Evidencias por ruta" />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {evidencesForLevel("secundaria").map((e, i) => (
+          {ROUTE_EVIDENCES.map((e, i) => (
             <ScrollReveal key={e.title} delay={i * 60}>
               <EvidenceCard evidence={e} />
             </ScrollReveal>

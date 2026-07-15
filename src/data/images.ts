@@ -161,6 +161,15 @@ export const IMAGES = {
     gastronomia: N_GASTRONOMIA,
     construccion: O_CONSTRUCCION,
   },
+
+  // Selector "Cómo se vive en cada nivel" (Distrito Maker): distintas de
+  // las 4 fotos de rutas y de las evidencias que aparecen en esa misma
+  // página.
+  distritoMakerLevels: {
+    inicial: D_BLOQUES_INICIAL,
+    primaria: B_ROBOTICA_GRUPO,
+    secundaria: K_PERFIL_ESTUDIANTE,
+  },
 } satisfies Record<string, SiteImage | string | Record<string, SiteImage>>;
 
 // Reexport individual para armar evidence.ts con las mismas constantes.

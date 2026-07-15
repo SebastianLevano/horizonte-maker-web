@@ -15,17 +15,24 @@ export type Level = {
   evidenceTypes: string[];
 };
 
-export const LEVEL_ACCENT_CLASSES: Record<LevelAccent, { text: string; bg: string; borderTop: string }> = {
-  inicial: { text: "text-level-inicial", bg: "bg-level-inicial-tint", borderTop: "border-t-level-inicial" },
+export const LEVEL_ACCENT_CLASSES: Record<LevelAccent, { text: string; bg: string; borderTop: string; solid: string }> = {
+  inicial: {
+    text: "text-level-inicial",
+    bg: "bg-level-inicial-tint",
+    borderTop: "border-t-level-inicial",
+    solid: "bg-level-inicial",
+  },
   primaria: {
     text: "text-level-primaria",
     bg: "bg-level-primaria-tint",
     borderTop: "border-t-level-primaria",
+    solid: "bg-level-primaria",
   },
   secundaria: {
     text: "text-level-secundaria",
     bg: "bg-level-secundaria-tint",
     borderTop: "border-t-level-secundaria",
+    solid: "bg-level-secundaria",
   },
 };
 
