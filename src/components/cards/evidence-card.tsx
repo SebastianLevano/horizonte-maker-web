@@ -21,12 +21,12 @@ export function EvidenceCard({ evidence }: { evidence: Evidence }) {
   return (
     <div className="overflow-hidden rounded-md border border-border bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]">
       {evidence.image ? (
-        <SiteImageBlock image={evidence.image} aspect="aspect-[4/3]" className="rounded-none border-0 border-b border-border" />
+        <SiteImageBlock image={evidence.image} aspect="aspect-[5/4]" className="rounded-none border-0 border-b border-border" />
       ) : (
-        <ImagePlaceholder label="Fotografía pendiente de autorización" aspect="aspect-[4/3]" className="rounded-none border-0 border-b border-border" />
+        <ImagePlaceholder label="Fotografía pendiente de autorización" aspect="aspect-[5/4]" className="rounded-none border-0 border-b border-border" />
       )}
-      <div className="p-5">
-        <p className="font-display text-lg font-semibold text-text">{evidence.title}</p>
+      <div className="p-6">
+        <p className="font-display text-xl font-semibold text-text">{evidence.title}</p>
         <div className="mt-4 space-y-1 border-t border-border pt-4 font-mono text-[11px] uppercase tracking-[0.04em] text-secondary">
           <p>{evidence.grade}</p>
           <p className="text-text-secondary normal-case tracking-normal">

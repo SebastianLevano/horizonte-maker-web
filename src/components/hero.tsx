@@ -30,16 +30,16 @@ export function Hero({
   children?: ReactNode;
 }) {
   const isPortada = variant === "portada";
-  const aspect = isPortada ? "aspect-[4/3]" : "aspect-[16/10]";
+  const aspect = isPortada ? "aspect-[5/4]" : "aspect-[16/10]";
 
   return (
     <section className={isPortada ? "border-b border-border" : "border-b border-border bg-surface"}>
       <Container
         className={`grid items-center gap-10 py-14 sm:py-20 ${
-          isPortada ? "lg:grid-cols-2 lg:py-28" : "lg:grid-cols-[1.1fr_0.9fr] lg:py-16"
+          isPortada ? "lg:grid-cols-[1fr_1.15fr] lg:py-24" : "lg:grid-cols-[1.1fr_0.9fr] lg:py-16"
         }`}
       >
-        <div>
+        <div className={isPortada ? "hero-text-enter" : ""}>
           {eyebrow && (
             <p className="mb-4 font-mono text-xs uppercase tracking-[0.08em] text-secondary">
               {eyebrow}
@@ -73,7 +73,7 @@ export function Hero({
           )}
           {children}
         </div>
-        <div className="relative">
+        <div className={`relative ${isPortada ? "hero-image-enter" : ""}`}>
           {image ? (
             <SiteImageBlock image={image} aspect={aspect} priority={isPortada} />
           ) : (

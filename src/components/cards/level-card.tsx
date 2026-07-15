@@ -23,16 +23,16 @@ export function LevelCard({ level }: { level: Level }) {
       <div className="overflow-hidden rounded-t-[calc(var(--radius-md)-2px)]">
         <SiteImageBlock
           image={IMAGES.levelCards[level.slug]}
-          aspect="aspect-[16/10]"
+          aspect="aspect-[4/3]"
           className="rounded-none border-0 border-b border-border transition-transform duration-300 group-hover:scale-[1.02]"
         />
       </div>
-      <div className="p-5">
+      <div className="p-6">
         <span className={`inline-block rounded-sm px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.04em] ${accent.bg} ${accent.text}`}>
           {level.ages}
         </span>
-        <h3 className="mt-2 text-lg font-semibold text-text">{level.name}</h3>
-        <p className="mt-3 text-sm text-text-secondary">{level.summary}</p>
+        <h3 className="mt-2.5 text-xl font-semibold text-text">{level.name}</h3>
+        <p className="mt-3 text-[15px] text-text-secondary">{level.summary}</p>
         <span className={`mt-4 inline-flex items-center gap-1 text-sm font-medium ${accent.text}`}>
           Conocer el nivel
           <svg

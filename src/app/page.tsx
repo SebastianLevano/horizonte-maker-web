@@ -70,7 +70,7 @@ export default function HomePage() {
           eyebrow="Niveles educativos"
           title="Una propuesta coherente de los 3 a los 16 años"
         />
-        <div className="grid gap-x-5 gap-y-8 pt-3 sm:grid-cols-3">
+        <div className="grid gap-x-6 gap-y-8 pt-3 sm:grid-cols-3">
           {LEVELS.map((level, i) => (
             <ScrollReveal key={level.slug} delay={i * 80}>
               <LevelCard level={level} />
@@ -109,7 +109,7 @@ export default function HomePage() {
           title="El trabajo de nuestros estudiantes, documentado"
           description="Contexto, grado y aprendizaje: cada evidencia se presenta como registro verificable."
         />
-        <div className="grid gap-5 sm:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-3">
           {EVIDENCES.slice(0, 3).map((e, i) => (
             <ScrollReveal key={e.title} delay={i * 70}>
               <EvidenceCard evidence={e} />
@@ -125,7 +125,7 @@ export default function HomePage() {
 
       <Section tint="accent">
         <SectionHeading eyebrow="Voces de nuestra comunidad" title="Lo que dicen las familias" />
-        <div className="grid gap-5 sm:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
             <ScrollReveal key={t.role} delay={i * 70}>
               <TestimonialCard testimonial={t} />
