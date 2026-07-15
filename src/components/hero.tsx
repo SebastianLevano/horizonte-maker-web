@@ -35,8 +35,8 @@ export function Hero({
   return (
     <section className={isPortada ? "border-b border-border" : "border-b border-border bg-surface"}>
       <Container
-        className={`grid items-center gap-10 py-14 sm:py-20 ${
-          isPortada ? "lg:grid-cols-[1fr_1.15fr] lg:py-24" : "lg:grid-cols-[1.1fr_0.9fr] lg:py-16"
+        className={`grid items-center gap-10 py-8 sm:py-12 ${
+          isPortada ? "lg:grid-cols-[0.95fr_1.2fr] lg:py-14" : "lg:grid-cols-[1.1fr_0.9fr] lg:py-16"
         }`}
       >
         <div className="hero-text-enter">

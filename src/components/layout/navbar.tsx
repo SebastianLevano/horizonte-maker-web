@@ -36,7 +36,7 @@ export function Navbar() {
           scrolled ? "border-border shadow-[var(--shadow-float)]" : "border-primary/10"
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between px-5 sm:px-8 lg:px-12">
           <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
             <Image
               src={IMAGES.logo}
@@ -116,10 +116,10 @@ export function Navbar() {
             })}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 lg:hidden">
             <button
               type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border bg-white transition-colors hover:border-primary/30 hover:bg-surface lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border bg-white transition-colors hover:border-primary/30 hover:bg-surface"
               aria-expanded={open}
               aria-controls="menu-movil"
               aria-label={open ? "Cerrar menú" : "Abrir menú"}
