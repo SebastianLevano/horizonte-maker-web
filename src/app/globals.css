@@ -278,3 +278,49 @@ h3, h4 {
     animation: none;
   }
 }
+
+/* Tarjeta volteable (Niveles, "Lo común a todos los niveles"): el frente
+   y el reverso son dos caras reales en 3D, no un cambio de contenido —
+   interacción distinta a los paneles/acordeones ya usados en el resto
+   del sitio. */
+.flip-card {
+  perspective: 1200px;
+}
+
+.flip-card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 500ms;
+}
+
+.flip-card.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+
+/* Riel de tarjetas con scroll horizontal (Niveles, "Organización del
+   nivel"): se navega arrastrando o con los botones, no con auto-avance —
+   el usuario decide el ritmo, a diferencia del resto de rotaciones
+   automáticas del sitio. */
+.card-rail {
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.card-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.card-rail > * {
+  scroll-snap-align: start;
+}
