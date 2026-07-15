@@ -39,7 +39,7 @@ export function Hero({
           isPortada ? "lg:grid-cols-[1fr_1.15fr] lg:py-24" : "lg:grid-cols-[1.1fr_0.9fr] lg:py-16"
         }`}
       >
-        <div className={isPortada ? "hero-text-enter" : ""}>
+        <div className="hero-text-enter">
           {eyebrow && (
             <p className="mb-4 font-mono text-xs uppercase tracking-[0.08em] text-secondary">
               {eyebrow}
@@ -73,7 +73,7 @@ export function Hero({
           )}
           {children}
         </div>
-        <div className={`relative ${isPortada ? "hero-image-enter" : ""}`}>
+        <div className="relative hero-image-enter">
           {image ? (
             <SiteImageBlock image={image} aspect={aspect} priority={isPortada} />
           ) : (

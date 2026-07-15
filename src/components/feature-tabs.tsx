@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { CONTENT_ICONS, ContentIconName } from "@/components/icons";
 import { ROUTE_ACCENT_CLASSES, RouteAccent } from "@/data/maker-routes";
 
-type TabItem = { title: string; description: string; icon: ContentIconName };
+type TabItem = { title: string; description: string; icon: ContentIconName; extra?: ReactNode };
 
 const INTERVAL_MS = 5000;
 const ACCENTS: RouteAccent[] = ["robotica", "diseno", "gastronomia", "construccion"];
@@ -131,6 +131,7 @@ export function FeatureTabs({ items, ariaLabel }: { items: TabItem[]; ariaLabel:
             </p>
             <h3 className="mt-1 font-display text-xl font-semibold text-text sm:text-2xl">{active.title}</h3>
             <p className="mt-2 max-w-xl text-sm text-text-secondary sm:text-base">{active.description}</p>
+            {active.extra && <div className="mt-4 max-w-xl">{active.extra}</div>}
           </div>
         </div>
 

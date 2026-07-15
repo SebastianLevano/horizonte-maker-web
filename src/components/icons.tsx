@@ -211,6 +211,7 @@ export const CONTENT_ICONS = {
   laptop: LaptopIcon,
   spark: SparkIcon,
   hammer: HammerIcon,
+  chefHat: ChefHatIcon,
 } as const;
 
 export type ContentIconName = keyof typeof CONTENT_ICONS;
