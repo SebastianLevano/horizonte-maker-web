@@ -5,7 +5,7 @@ import { LevelCard } from "@/components/cards/level-card";
 import { FlipCard } from "@/components/cards/flip-card";
 import { CloseBlock } from "@/components/close-block";
 import { ScrollReveal } from "@/components/scroll-reveal";
-import { LEVELS } from "@/data/levels";
+import { LEVELS, LEVEL_ACCENT_CLASSES } from "@/data/levels";
 import { IMAGES } from "@/data/images";
 import { buildMetadata } from "@/lib/seo";
 
@@ -61,6 +61,42 @@ export default function NivelesPage() {
             </ScrollReveal>
           ))}
         </div>
+      </Section>
+
+      <Section>
+        <SectionHeading
+          eyebrow="Horario"
+          title="Horario por nivel"
+          description="Decisión institucional, la misma para todas las secciones de un nivel."
+        />
+        <ScrollReveal>
+          <div className="overflow-hidden rounded-lg border border-border">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="bg-surface">
+                  <th className="px-5 py-3 font-mono text-xs uppercase tracking-[0.06em] text-secondary">Nivel</th>
+                  <th className="px-5 py-3 font-mono text-xs uppercase tracking-[0.06em] text-secondary">Horario</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {LEVELS.map((level) => {
+                  const accent = LEVEL_ACCENT_CLASSES[level.slug];
+                  return (
+                    <tr key={level.slug} className="bg-white transition-colors hover:bg-surface">
+                      <td className="px-5 py-4">
+                        <span className="inline-flex items-center gap-2.5 font-medium text-text">
+                          <span className={`h-2.5 w-2.5 flex-shrink-0 rounded-full ${accent.solid}`} aria-hidden="true" />
+                          {level.name}
+                        </span>
+                      </td>
+                      <td className="px-5 py-4 text-text-secondary">{level.schedule}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </ScrollReveal>
       </Section>
 
       <CloseBlock

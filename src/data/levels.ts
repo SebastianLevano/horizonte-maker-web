@@ -9,6 +9,8 @@ export type Level = {
   ages: string;
   grades: string;
   sectionSize: string;
+  /** Horario de clases, decisión institucional confirmada (brief). */
+  schedule: string;
   centralMessage: string;
   summary: string;
   features: { title: string; description: string }[];
@@ -43,6 +45,7 @@ export const LEVELS: Level[] = [
     ages: "3, 4 y 5 años",
     grades: "3 grados",
     sectionSize: "15 estudiantes por sección",
+    schedule: "8:30 a. m. – 12:30 p. m.",
     centralMessage:
       "Aprender mediante juego, movimiento, exploración, proyectos y expresión.",
     summary:
@@ -87,6 +90,7 @@ export const LEVELS: Level[] = [
     ages: "1.° a 6.° grado",
     grades: "6 grados",
     sectionSize: "25 estudiantes por sección",
+    schedule: "7:30 a. m. – 2:45 p. m.",
     centralMessage:
       "Conectar los aprendizajes académicos con proyectos y soluciones concretas.",
     summary:
@@ -131,6 +135,7 @@ export const LEVELS: Level[] = [
     ages: "12 a 16 años",
     grades: "1.° a 5.° grado",
     sectionSize: "25 estudiantes por sección",
+    schedule: "7:30 a. m. – 3:15 p. m.",
     centralMessage:
       "Integrar rigor académico, orientación vocacional y formación técnica progresiva.",
     summary:

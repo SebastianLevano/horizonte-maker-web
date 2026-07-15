@@ -5,8 +5,8 @@ import { HorizontalCardRail } from "@/components/horizontal-card-rail";
 import { EvidenceCard, EvidenceEmptyState } from "@/components/cards/evidence-card";
 import { CloseBlock } from "@/components/close-block";
 import { ScrollReveal } from "@/components/scroll-reveal";
-import { ROUTE_ICONS } from "@/components/icons";
-import { getLevel } from "@/data/levels";
+import { CONTENT_ICONS, ROUTE_ICONS } from "@/components/icons";
+import { getLevel, LEVEL_ACCENT_CLASSES } from "@/data/levels";
 import { MAKER_ROUTES, ROUTE_ACCENT_CLASSES } from "@/data/maker-routes";
 import { IMAGES } from "@/data/images";
 import { evidencesForLevel } from "@/data/evidence";
@@ -15,6 +15,13 @@ export function LevelPageTemplate({ slug }: { slug: string }) {
   const level = getLevel(slug);
   if (!level) notFound();
   const evidences = evidencesForLevel(level.slug);
+  const accent = LEVEL_ACCENT_CLASSES[level.slug];
+
+  const QUICK_FACTS = [
+    { label: "Edad", value: level.ages, icon: "calendar" as const },
+    { label: "Sección", value: level.sectionSize, icon: "users" as const },
+    { label: "Horario", value: level.schedule, icon: "clock" as const },
+  ];
 
   return (
     <>
@@ -26,6 +33,30 @@ export function LevelPageTemplate({ slug }: { slug: string }) {
         secondaryCta={{ label: "Consultar vacantes", href: "/admision" }}
         image={IMAGES.levelHero[level.slug]}
       />
+
+      <Section noBorder>
+        <ScrollReveal>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {QUICK_FACTS.map((fact) => {
+              const Icon = CONTENT_ICONS[fact.icon];
+              return (
+                <div
+                  key={fact.label}
+                  className={`flex items-center gap-3 rounded-md border border-border border-t-2 bg-white p-4 ${accent.borderTop}`}
+                >
+                  <span className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md ${accent.bg} ${accent.text}`}>
+                    <Icon />
+                  </span>
+                  <div>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.06em] text-secondary">{fact.label}</p>
+                    <p className="text-sm font-medium text-text">{fact.value}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </ScrollReveal>
+      </Section>
 
       <Section>
         <SectionHeading title="Organización del nivel" description="Desliza o usa las flechas para ver todo." />
