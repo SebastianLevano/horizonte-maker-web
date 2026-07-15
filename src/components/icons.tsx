@@ -193,6 +193,27 @@ export function LockIcon({ className = base }: IconProps) {
   );
 }
 
+export function PhoneIcon({ className = base }: IconProps) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M4.5 5.5c0-.6.4-1 1-1h2.4c.5 0 .9.3 1 .8l.7 3a1 1 0 01-.3 1L7.8 10.8a12.5 12.5 0 005.4 5.4l1.5-1.5a1 1 0 011-.3l3 .7c.5.1.8.5.8 1V18.5c0 .6-.4 1-1 1H17C10.1 19.5 4.5 13.9 4.5 7V5.5z"
+      />
+    </svg>
+  );
+}
+
+export function MailIcon({ className = base }: IconProps) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3.5" y="5.5" width="17" height="13" rx="1.5" strokeLinejoin="round" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 6.5l7.5 6 7.5-6" />
+    </svg>
+  );
+}
+
 export function ClockIcon({ className = base }: IconProps) {
   return (
     <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24" aria-hidden="true">
@@ -232,6 +253,8 @@ export const CONTENT_ICONS = {
   chefHat: ChefHatIcon,
   clock: ClockIcon,
   lock: LockIcon,
+  phone: PhoneIcon,
+  mail: MailIcon,
 } as const;
 
 export type ContentIconName = keyof typeof CONTENT_ICONS;
