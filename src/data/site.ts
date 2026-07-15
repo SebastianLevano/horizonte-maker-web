@@ -9,6 +9,8 @@ export const SITE = {
   legalName: "I.E.P. Colegio Horizonte Maker S.A.C.", // vista previa
   ruc: "20601234567", // vista previa — formato válido, número no real
   shortName: "Horizonte Maker",
+  /** Nombre de marca para el título de la pestaña del navegador (distinto del nombre institucional completo). */
+  tabTitle: "Horizonte Maker College",
   tagline: "Aprender haciendo, crear para transformar",
   description:
     "Colegio en Lurín, Lima, con propuesta educativa que integra el Currículo Nacional, el ABP, STEAM, Reggio Emilia y el Distrito Maker. Inicial, Primaria y Secundaria.",

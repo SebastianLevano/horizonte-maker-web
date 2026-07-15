@@ -28,14 +28,14 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} · Colegio en Lurín`,
-    template: `%s · ${SITE.name}`,
+    default: SITE.tabTitle,
+    template: `%s - ${SITE.tabTitle}`,
   },
   description: SITE.description,
   openGraph: {
     type: "website",
     locale: "es_PE",
-    siteName: SITE.name,
+    siteName: SITE.tabTitle,
   },
   twitter: {
     card: "summary_large_image",

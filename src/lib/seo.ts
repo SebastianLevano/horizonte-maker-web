@@ -2,9 +2,10 @@ import { Metadata } from "next";
 import { SITE } from "@/data/site";
 
 // Meta titles y descriptions de docs/seo.md §4, una entrada por ruta.
-export const PAGE_META: Record<string, { title: string; description: string }> = {
+// "title" es opcional: si se omite (como en "/"), la pestaña usa el título
+// por defecto del layout raíz en vez de duplicarlo con la plantilla "%s -".
+export const PAGE_META: Record<string, { title?: string; description: string }> = {
   "/": {
-    title: `${SITE.name} · Colegio en Lurín`,
     description:
       "Colegio en Lurín donde los estudiantes aprenden investigando, creando y resolviendo desafíos reales. Inicial, Primaria y Secundaria. Agenda una visita.",
   },
@@ -19,7 +20,7 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
       "Currículo Nacional, aprendizaje basado en proyectos, STEAM y Reggio Emilia. Descubre cómo aprenden nuestros estudiantes.",
   },
   "/niveles": {
-    title: "Niveles educativos",
+    title: "Niveles",
     description:
       "Inicial, Primaria y Secundaria en Lurín. Una propuesta coherente de los 3 a los 16 años. Conoce cada nivel.",
   },
@@ -44,7 +45,7 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
       "Cuatro rutas de aprendizaje práctico: robótica, diseño y fabricación, gastronomía y construcción. El eje de nuestro colegio en Lurín.",
   },
   "/vida-escolar": {
-    title: "Vida escolar y proyectos",
+    title: "Vida escolar",
     description:
       "Proyectos, ferias, portafolios y evidencias de aprendizaje. Mira lo que construyen nuestros estudiantes en Lurín.",
   },
@@ -73,7 +74,7 @@ export const PAGE_META: Record<string, { title: string; description: string }> =
     description: "Visítanos en Lurín. Teléfono, WhatsApp, correo, horarios de atención y cómo llegar.",
   },
   "/politicas": {
-    title: "Políticas de privacidad",
+    title: "Políticas",
     description: "Política de privacidad, cookies, tratamiento de datos personales y uso de imágenes.",
   },
 };
@@ -83,11 +84,11 @@ export function buildMetadata(path: string): Metadata {
   if (!entry) return {};
   const url = `${SITE.url}${path}`;
   return {
-    title: entry.title,
+    ...(entry.title && { title: entry.title }),
     description: entry.description,
     alternates: { canonical: url },
     openGraph: {
-      title: entry.title,
+      ...(entry.title && { title: entry.title }),
       description: entry.description,
       url,
       type: "website",
