@@ -170,6 +170,10 @@ export const IMAGES = {
     primaria: B_ROBOTICA_GRUPO,
     secundaria: K_PERFIL_ESTUDIANTE,
   },
+
+  // Apoyo visual en el cuerpo de página (antes solo tenían foto de hero).
+  familiasAcompanamiento: E_DOCENTE,
+  trabajaConNosotrosEquipo: F_TALLER_FABRICACION,
 } satisfies Record<string, SiteImage | string | Record<string, SiteImage>>;
 
 // Reexport individual para armar evidence.ts con las mismas constantes.

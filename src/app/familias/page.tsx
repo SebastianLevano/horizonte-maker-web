@@ -5,10 +5,15 @@ import { FeatureCard } from "@/components/cards/feature-card";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { CloseBlock } from "@/components/close-block";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { ExpandableInfoGrid } from "@/components/expandable-info-grid";
+import { SiteImageBlock } from "@/components/ui/site-image";
+import { RouteAccent } from "@/data/maker-routes";
 import { FAMILIES_FAQ } from "@/data/faq";
 import { IMAGES } from "@/data/images";
 import { buildMetadata } from "@/lib/seo";
 import { FaqJsonLd } from "@/components/json-ld";
+
+const ACCENTS: RouteAccent[] = ["robotica", "diseno", "gastronomia", "construccion"];
 
 const WELLBEING = [
   { title: "Tutoría", description: "Acompañamiento cercano por nivel.", icon: "users" as const },
@@ -17,9 +22,24 @@ const WELLBEING = [
 ];
 
 const COMMUNICATION_CHANNELS = [
-  { title: "Agenda digital", description: "Notas, tareas y avisos por sección, disponibles en cualquier momento.", icon: "laptop" as const },
-  { title: "Correo institucional", description: "Comunicación directa con tutoría y coordinación de cada nivel.", icon: "chat" as const },
-  { title: "Reuniones bimestrales", description: "Encuentro presencial por nivel para revisar el progreso del estudiante.", icon: "calendar" as const },
+  {
+    title: "Agenda digital",
+    description: "Notas, tareas y avisos por sección, disponibles en cualquier momento.",
+    example: "Lunes 7:00 a. m.: recordatorio de la reunión de tutoría de la semana.",
+    icon: "laptop" as const,
+  },
+  {
+    title: "Correo institucional",
+    description: "Comunicación directa con tutoría y coordinación de cada nivel.",
+    example: "Respuesta a consultas en menos de 48 horas hábiles.",
+    icon: "chat" as const,
+  },
+  {
+    title: "Reuniones bimestrales",
+    description: "Encuentro presencial por nivel para revisar el progreso del estudiante.",
+    example: "Marzo, mayo, agosto y octubre, por sección.",
+    icon: "calendar" as const,
+  },
 ];
 
 export const metadata: Metadata = buildMetadata("/familias");
@@ -37,24 +57,25 @@ export default function FamiliasPage() {
 
       <Section>
         <SectionHeading title="Acompañamiento a las familias" />
-        <div className="max-w-md">
-          <FeatureCard
-            title="Escuela para padres"
-            description="Talleres bimestrales sobre acompañamiento socioemocional, límites y convivencia, y uso saludable de tecnología."
-            icon="users"
-          />
+        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <ScrollReveal>
+            <SiteImageBlock image={IMAGES.familiasAcompanamiento} aspect="aspect-[4/3]" />
+          </ScrollReveal>
+          <ScrollReveal delay={70}>
+            <FeatureCard
+              title="Escuela para padres"
+              description="Talleres bimestrales sobre acompañamiento socioemocional, límites y convivencia, y uso saludable de tecnología."
+              icon="users"
+            />
+          </ScrollReveal>
         </div>
       </Section>
 
       <Section surface>
-        <SectionHeading title="Cómo nos comunicamos" />
-        <div className="grid gap-4 sm:grid-cols-3">
-          {COMMUNICATION_CHANNELS.map((f, i) => (
-            <ScrollReveal key={f.title} delay={i * 60}>
-              <FeatureCard title={f.title} description={f.description} icon={f.icon} />
-            </ScrollReveal>
-          ))}
-        </div>
+        <SectionHeading title="Cómo nos comunicamos" description="Toca cada tarjeta para ver un ejemplo." />
+        <ScrollReveal>
+          <ExpandableInfoGrid items={COMMUNICATION_CHANNELS} />
+        </ScrollReveal>
       </Section>
 
       <Section>
@@ -62,7 +83,7 @@ export default function FamiliasPage() {
         <div className="grid gap-4 sm:grid-cols-3">
           {WELLBEING.map((f, i) => (
             <ScrollReveal key={f.title} delay={i * 60}>
-              <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+              <FeatureCard title={f.title} description={f.description} icon={f.icon} accent={ACCENTS[i % ACCENTS.length]} />
             </ScrollReveal>
           ))}
         </div>
