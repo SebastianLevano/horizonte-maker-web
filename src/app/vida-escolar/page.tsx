@@ -1,17 +1,20 @@
 import { Metadata } from "next";
 import { Hero } from "@/components/hero";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { EvidenceCard } from "@/components/cards/evidence-card";
+import { EvidenceGallery } from "@/components/evidence-gallery";
 import { FeatureCard } from "@/components/cards/feature-card";
 import { CloseBlock } from "@/components/close-block";
 import { NewsletterForm } from "@/components/forms/newsletter-form";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { CONTENT_ICONS } from "@/components/icons";
+import { RouteAccent } from "@/data/maker-routes";
 import { IMAGES } from "@/data/images";
 import { EVIDENCES } from "@/data/evidence";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata("/vida-escolar");
+
+const ACCENTS: RouteAccent[] = ["robotica", "diseno", "gastronomia", "construccion"];
 
 const LOCAL_IMPACT = [
   { title: "Huerto comunitario", description: "Estudiantes de Primaria diseñan y mantienen un huerto en convenio con vecinos del entorno del colegio.", icon: "mapPin" as const },
@@ -48,14 +51,10 @@ export default function VidaEscolarPage() {
       />
 
       <Section>
-        <SectionHeading title="Proyectos destacados" />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {EVIDENCES.map((e, i) => (
-            <ScrollReveal key={e.title} delay={i * 60}>
-              <EvidenceCard evidence={e} />
-            </ScrollReveal>
-          ))}
-        </div>
+        <SectionHeading title="Proyectos destacados" description="Filtra por nivel para ver solo lo que te interesa." />
+        <ScrollReveal>
+          <EvidenceGallery evidences={EVIDENCES} />
+        </ScrollReveal>
       </Section>
 
       <Section surface>
@@ -63,7 +62,7 @@ export default function VidaEscolarPage() {
         <div className="grid gap-4 sm:grid-cols-3">
           {LOCAL_IMPACT.map((f, i) => (
             <ScrollReveal key={f.title} delay={i * 60}>
-              <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+              <FeatureCard title={f.title} description={f.description} icon={f.icon} accent={ACCENTS[i % ACCENTS.length]} />
             </ScrollReveal>
           ))}
         </div>
@@ -74,7 +73,7 @@ export default function VidaEscolarPage() {
         <div className="grid gap-4 sm:grid-cols-2">
           {FAIRS.map((f, i) => (
             <ScrollReveal key={f.title} delay={i * 60}>
-              <FeatureCard title={f.title} description={f.description} icon={f.icon} />
+              <FeatureCard title={f.title} description={f.description} icon={f.icon} accent={ACCENTS[(i + 2) % ACCENTS.length]} />
             </ScrollReveal>
           ))}
         </div>
@@ -82,41 +81,49 @@ export default function VidaEscolarPage() {
 
       <Section surface>
         <SectionHeading title="Noticias" />
-        <div className="grid gap-5 sm:grid-cols-3">
-          {NEWS.map((n, i) => {
-            const Icon = CONTENT_ICONS.megaphone;
-            return (
-              <ScrollReveal key={n.title} delay={i * 60}>
+        <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
+          <ScrollReveal>
+            <div className="group rounded-lg border border-border bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-float)] sm:p-8">
+              <span className="inline-flex items-center gap-2 rounded-sm bg-primary/10 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.06em] text-primary">
+                Última noticia
+              </span>
+              <p className="mt-4 font-mono text-xs uppercase tracking-[0.04em] text-secondary">{NEWS[0].date}</p>
+              <h3 className="mt-1.5 font-display text-2xl font-semibold text-text">{NEWS[0].title}</h3>
+              <p className="mt-3 max-w-md text-text-secondary">{NEWS[0].excerpt}</p>
+            </div>
+          </ScrollReveal>
+          <div className="flex flex-col gap-4">
+            {NEWS.slice(1).map((n, i) => (
+              <ScrollReveal key={n.title} delay={(i + 1) * 60}>
                 <div className="rounded-md border border-border bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-md bg-secondary/10 text-secondary">
-                    <Icon />
-                  </span>
-                  <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.06em] text-secondary">{n.date}</p>
-                  <p className="mt-1 font-semibold text-text">{n.title}</p>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.06em] text-secondary">{n.date}</p>
+                  <p className="mt-1.5 font-semibold text-text">{n.title}</p>
                   <p className="mt-2 text-sm text-text-secondary">{n.excerpt}</p>
                 </div>
               </ScrollReveal>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </Section>
 
       <Section>
         <SectionHeading title="Calendario de eventos" />
-        <div className="divide-y divide-border rounded-md border border-border bg-white">
-          {CALENDAR.map((c) => {
+        <ol className="relative border-l-2 border-border pl-8">
+          {CALENDAR.map((c, i) => {
             const Icon = CONTENT_ICONS.calendar;
             return (
-              <div key={c.event} className="flex items-center gap-4 px-5 py-4">
-                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
-                  <Icon />
-                </span>
-                <span className="flex-1 font-medium text-text">{c.event}</span>
-                <span className="font-mono text-xs uppercase tracking-[0.04em] text-secondary">{c.date}</span>
-              </div>
+              <ScrollReveal key={c.event} delay={i * 70}>
+                <li className="relative pb-8 last:pb-0">
+                  <span className="absolute -left-[41px] top-0 flex h-8 w-8 items-center justify-center rounded-full border-2 border-secondary bg-white text-secondary">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <p className="font-mono text-xs uppercase tracking-[0.06em] text-secondary">{c.date}</p>
+                  <p className="mt-1 font-medium text-text">{c.event}</p>
+                </li>
+              </ScrollReveal>
             );
           })}
-        </div>
+        </ol>
       </Section>
 
       <Section surface>
