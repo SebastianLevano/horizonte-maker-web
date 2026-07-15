@@ -3,10 +3,9 @@ import { Hero } from "@/components/hero";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { FeatureCard } from "@/components/cards/feature-card";
 import { AllianceForm } from "@/components/forms/alliance-form";
-import { PendingNotice } from "@/components/ui/pending-notice";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { SiteImageBlock } from "@/components/ui/site-image";
-import { CONTENT_ICONS } from "@/components/icons";
+import { CONTENT_ICONS, LockIcon } from "@/components/icons";
 import { RouteAccent, ROUTE_ACCENT_CLASSES } from "@/data/maker-routes";
 import { IMAGES } from "@/data/images";
 import { buildMetadata } from "@/lib/seo";
@@ -67,12 +66,32 @@ export default function AlianzasPage() {
       </Section>
 
       <Section surface>
-        <SectionHeading title="Convenios vigentes" />
-        <PendingNotice>
+        <SectionHeading
+          title="Convenios vigentes"
+          description="Así se verá esta sección cuando existan convenios firmados. Ningún nombre de institución aquí es real."
+        />
+        <div className="grid gap-4 sm:grid-cols-3">
+          {[1, 2, 3].map((i) => (
+            <ScrollReveal key={i} delay={i * 60}>
+              <div className="rounded-md border border-dashed border-border-strong bg-white p-5">
+                <div className="h-10 w-10 animate-pulse rounded-md bg-border" aria-hidden="true" />
+                <div className="mt-4 h-3 w-3/4 animate-pulse rounded-full bg-border" aria-hidden="true" />
+                <div className="mt-2 h-3 w-1/2 animate-pulse rounded-full bg-border" aria-hidden="true" />
+                <div className="mt-5 flex items-center gap-2 border-t border-border pt-4">
+                  <LockIcon className="h-4 w-4 text-text-secondary" />
+                  <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-text-secondary">
+                    Pendiente de firma
+                  </span>
+                </div>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+        <p className="mt-5 max-w-2xl text-sm text-text-secondary">
           Sin convenios firmados publicados aún. Esta sección no se rellena con alianzas
           proyectadas: los dos bloques siempre están separados y rotulados
           (docs/content-guide.md).
-        </PendingNotice>
+        </p>
       </Section>
 
       <Section>

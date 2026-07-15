@@ -184,6 +184,15 @@ export function MapPinIcon({ className = base }: IconProps) {
   );
 }
 
+export function LockIcon({ className = base }: IconProps) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="5" y="11" width="14" height="9" rx="1.5" strokeLinejoin="round" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8 11V7.5a4 4 0 018 0V11" />
+    </svg>
+  );
+}
+
 export function ClockIcon({ className = base }: IconProps) {
   return (
     <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.6} viewBox="0 0 24 24" aria-hidden="true">
@@ -222,6 +231,7 @@ export const CONTENT_ICONS = {
   hammer: HammerIcon,
   chefHat: ChefHatIcon,
   clock: ClockIcon,
+  lock: LockIcon,
 } as const;
 
 export type ContentIconName = keyof typeof CONTENT_ICONS;
