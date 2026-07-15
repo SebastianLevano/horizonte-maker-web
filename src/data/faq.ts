@@ -33,6 +33,16 @@ export const ADMISSION_FAQ: FaqItem[] = [
     answer:
       "Sí: descuento por pronto pago de matrícula, convenio para hermanos matriculados y beneficio para hijos de exalumnos cuando corresponda.",
   },
+  {
+    question: "¿Puedo visitar el colegio antes de postular?",
+    answer:
+      "Sí, la visita guiada es parte del proceso: conoces el campus, los laboratorios del Distrito Maker y la propuesta educativa antes de la entrevista informativa.",
+  },
+  {
+    question: "¿Dónde está ubicado el colegio?",
+    answer:
+      "En Lurín, Lima, en la zona entre Av. México, Av. Perú y Av. Independencia, conectada con la Panamericana Sur.",
+  },
 ];
 
 export const FAMILIES_FAQ: FaqItem[] = [

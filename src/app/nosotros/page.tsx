@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { Hero } from "@/components/hero";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { CloseBlock } from "@/components/close-block";
@@ -7,7 +8,7 @@ import { SiteImageBlock } from "@/components/ui/site-image";
 import { FeatureTabs } from "@/components/feature-tabs";
 import { CONTENT_ICONS, ContentIconName } from "@/components/icons";
 import { VALUES, STUDENT_PROFILE_TRAITS } from "@/data/values";
-import { MISSION, VISION, HISTORY } from "@/data/site";
+import { MISSION, VISION } from "@/data/site";
 import { IMAGES } from "@/data/images";
 import { TESTIMONIALS } from "@/data/testimonials";
 import { buildMetadata } from "@/lib/seo";
@@ -15,7 +16,6 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata("/nosotros");
 
 const STORY_TABS = [
-  { title: "Historia", description: HISTORY, icon: "compass" as const },
   { title: "Misión", description: MISSION, icon: "target" as const },
   { title: "Visión", description: VISION, icon: "spark" as const },
 ];
@@ -34,17 +34,6 @@ const VALUE_TABS = VALUES.map((v) => ({
 
 const TRAIT_ICONS: ContentIconName[] = ["compass", "flask", "book", "target"];
 
-const CAMPUS_ZONES: { zone: string; icon: ContentIconName }[] = [
-  { zone: "Nivel Inicial", icon: "heart" },
-  { zone: "Nivel Primaria", icon: "book" },
-  { zone: "Nivel Secundaria", icon: "laptop" },
-  { zone: "Distrito Maker", icon: "hammer" },
-  { zone: "Comedor / Cafetín", icon: "chefHat" },
-  { zone: "Auditorio", icon: "megaphone" },
-  { zone: "Cancha multiuso", icon: "target" },
-  { zone: "Zona administrativa", icon: "briefcase" },
-];
-
 // Roles institucionales, sin nombres propios inventados: el brief exige
 // confirmar qué autoridades sí se publican antes de nombrarlas (§15).
 const AUTHORITIES: { role: string; description: string; icon: ContentIconName }[] = [
@@ -54,20 +43,35 @@ const AUTHORITIES: { role: string; description: string; icon: ContentIconName }[
   { role: "Psicología escolar", description: "Acompañamiento emocional y orientación vocacional por nivel.", icon: "heart" },
 ];
 
+const MORE_ABOUT_US = [
+  {
+    title: "Infraestructura",
+    description: "Un recorrido por el campus: laboratorios, niveles y zonas comunes.",
+    href: "/nosotros/infraestructura",
+    icon: "mapPin" as const,
+  },
+  {
+    title: "Historia",
+    description: "Cómo nació Horizonte Maker y por qué el Distrito Maker es su columna vertebral.",
+    href: "/nosotros/historia",
+    icon: "compass" as const,
+  },
+];
+
 export default function NosotrosPage() {
   return (
     <>
       <Hero
-        eyebrow="Nosotros"
+        eyebrow="Nosotros · Identidad"
         title="Un proyecto educativo con raíces en Lurín"
         description="Educación integral, innovadora y práctica, pensada para la comunidad que la rodea."
         image={IMAGES.nosotros}
       />
 
       <Section>
-        <SectionHeading eyebrow="Nuestra historia" title="De una pregunta simple a un proyecto educativo" />
+        <SectionHeading eyebrow="Identidad" title="Misión y visión" />
         <ScrollReveal>
-          <FeatureTabs items={STORY_TABS} ariaLabel="Historia, misión y visión de Horizonte Maker" />
+          <FeatureTabs items={STORY_TABS} ariaLabel="Misión y visión de Horizonte Maker" />
         </ScrollReveal>
       </Section>
 
@@ -120,47 +124,6 @@ export default function NosotrosPage() {
 
       <Section>
         <SectionHeading
-          eyebrow="Infraestructura"
-          title="Nuestras instalaciones"
-          description="Un campus diseñado para que cada nivel y cada ruta del Distrito Maker tengan su propio espacio."
-        />
-        <ScrollReveal>
-          <SiteImageBlock
-            image={IMAGES.nosotrosInstalaciones}
-            aspect="aspect-[21/9]"
-            className="mb-8"
-            sizes="100vw"
-          />
-        </ScrollReveal>
-        <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
-          <ScrollReveal delay={70}>
-            <SiteImageBlock image={IMAGES.plano} aspect="aspect-[940/788]" sizes="(min-width: 1024px) 700px, 100vw" />
-          </ScrollReveal>
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[0.06em] text-secondary">
-              Zonas del campus
-            </p>
-            <div className="mt-3 grid gap-2">
-              {CAMPUS_ZONES.map(({ zone, icon }, i) => {
-                const Icon = CONTENT_ICONS[icon];
-                return (
-                  <ScrollReveal key={zone} delay={i * 40}>
-                    <div className="flex items-center gap-2.5 rounded-md border border-border bg-white px-3 py-2.5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-float)]">
-                      <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-secondary/10 text-secondary">
-                        <Icon className="h-4 w-4" />
-                      </span>
-                      <span className="text-sm text-text-secondary">{zone}</span>
-                    </div>
-                  </ScrollReveal>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      <Section surface>
-        <SectionHeading
           title="Autoridades"
           description="Roles institucionales. Los nombres se publican cuando el colegio confirme su difusión."
         />
@@ -176,6 +139,41 @@ export default function NosotrosPage() {
                   <p className="mt-3 font-semibold text-text">{a.role}</p>
                   <p className="mt-2 text-sm text-text-secondary">{a.description}</p>
                 </div>
+              </ScrollReveal>
+            );
+          })}
+        </div>
+      </Section>
+
+      <Section surface>
+        <SectionHeading title="Conoce más de nosotros" />
+        <div className="grid gap-4 sm:grid-cols-2">
+          {MORE_ABOUT_US.map((item, i) => {
+            const Icon = CONTENT_ICONS[item.icon];
+            return (
+              <ScrollReveal key={item.title} delay={i * 70}>
+                <Link
+                  href={item.href}
+                  className="group flex items-center gap-4 rounded-md border border-border bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]"
+                >
+                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+                    <Icon />
+                  </span>
+                  <div className="flex-1">
+                    <p className="font-semibold text-text">{item.title}</p>
+                    <p className="mt-1 text-sm text-text-secondary">{item.description}</p>
+                  </div>
+                  <svg
+                    className="h-5 w-5 flex-shrink-0 text-text-secondary transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
               </ScrollReveal>
             );
           })}

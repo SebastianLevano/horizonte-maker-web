@@ -101,6 +101,10 @@
 
 html {
   scroll-behavior: smooth;
+  /* El header queda fijo (sticky) — sin esto, cualquier enlace #ancla
+     (menú de Admisión, Nosotros, CTAs del hero) deja el título tapado
+     detrás de la barra de navegación. */
+  scroll-padding-top: 96px;
 }
 
 body {

@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { ADMISSION_CTA, NAV_GROUPS } from "@/data/nav";
-import { Button } from "@/components/ui/button";
+import { NAV_GROUPS } from "@/data/nav";
 
 export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
   const panelRef = useRef<HTMLDivElement>(null);
@@ -35,9 +34,14 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
             <Link
               href={group.href ?? "#"}
               onClick={onClose}
-              className="block py-2 text-base font-medium text-text"
+              className="flex items-center gap-1.5 py-2 text-base font-medium text-text"
             >
               {group.label}
+              {group.children && (
+                <svg className="h-4 w-4 text-text-secondary" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              )}
             </Link>
             {group.children && (
               <div className="ml-3 flex flex-col">
@@ -55,13 +59,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
             )}
           </div>
         ))}
-        <Link href="/contacto" onClick={onClose} className="py-3 text-base font-medium text-text">
-          Contacto
-        </Link>
       </nav>
-      <Button href={ADMISSION_CTA.href} className="mt-4 w-full" onClick={onClose}>
-        {ADMISSION_CTA.label}
-      </Button>
     </div>
   );
 }

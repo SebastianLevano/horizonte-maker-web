@@ -14,6 +14,16 @@ export const PAGE_META: Record<string, { title?: string; description: string }> 
     description:
       "Conoce nuestra misión, visión y valores. Un proyecto educativo con raíces en Lurín que forma jóvenes que hacen, resuelven y construyen.",
   },
+  "/nosotros/infraestructura": {
+    title: "Infraestructura",
+    description:
+      "Conoce el campus de Horizonte Maker en Lurín: un espacio diseñado para que cada nivel y cada ruta del Distrito Maker tengan su propio lugar.",
+  },
+  "/nosotros/historia": {
+    title: "Historia",
+    description:
+      "La historia detrás de Horizonte Maker: cómo nació el proyecto y por qué el Distrito Maker es la columna vertebral del colegio.",
+  },
   "/modelo-educativo": {
     title: "Modelo educativo",
     description:
@@ -53,6 +63,16 @@ export const PAGE_META: Record<string, { title?: string; description: string }> 
     title: "Admisión",
     description:
       "Conoce el proceso de admisión, requisitos y vacantes. Solicita información y agenda una visita a nuestro colegio en Lurín.",
+  },
+  "/admision/fechas-y-costos": {
+    title: "Fechas y costos",
+    description:
+      "Matrícula, pensión, beneficios y fechas de la campaña de admisión de Horizonte Maker en Lurín.",
+  },
+  "/admision/preguntas-frecuentes": {
+    title: "Preguntas frecuentes",
+    description:
+      "Resolvemos las dudas más comunes sobre el proceso de admisión, costos, vacantes y requisitos de Horizonte Maker.",
   },
   "/familias": {
     title: "Familias",

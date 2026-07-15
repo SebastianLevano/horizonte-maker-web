@@ -1,4 +1,6 @@
-// Estructura de menú según docs/sitemap.md §2.
+// Estructura de menú (reorganizada a pedido del usuario: Nosotros,
+// Niveles, Distrito Maker, Comunidad, Admisión, Contacto — todos como
+// enlaces de navegación normales, sin botón de acento).
 
 export type NavLink = {
   label: string;
@@ -16,8 +18,9 @@ export const NAV_GROUPS: NavGroup[] = [
     label: "Nosotros",
     href: "/nosotros",
     children: [
-      { label: "Nosotros", href: "/nosotros" },
-      { label: "Modelo educativo", href: "/modelo-educativo" },
+      { label: "Identidad", href: "/nosotros" },
+      { label: "Infraestructura", href: "/nosotros/infraestructura" },
+      { label: "Historia", href: "/nosotros/historia" },
     ],
   },
   {
@@ -34,25 +37,33 @@ export const NAV_GROUPS: NavGroup[] = [
     href: "/distrito-maker",
   },
   {
-    label: "Vida escolar",
+    label: "Comunidad",
     href: "/vida-escolar",
     children: [
-      { label: "Vida escolar y proyectos", href: "/vida-escolar" },
+      { label: "Vida escolar", href: "/vida-escolar" },
       { label: "Alianzas", href: "/alianzas" },
+      { label: "Familias", href: "/familias" },
     ],
   },
   {
-    label: "Familias",
-    href: "/familias",
+    label: "Admisión",
+    href: "/admision",
     children: [
-      { label: "Familias", href: "/familias" },
-      { label: "Trabaja con nosotros", href: "/trabaja-con-nosotros" },
+      { label: "Proceso", href: "/admision" },
+      { label: "Fechas y costos", href: "/admision/fechas-y-costos" },
+      { label: "Preguntas frecuentes", href: "/admision/preguntas-frecuentes" },
     ],
+  },
+  {
+    label: "Contacto",
+    href: "/contacto",
   },
 ];
 
-export const ADMISSION_CTA: NavLink = { label: "Admisión", href: "/admision" };
-
+// El pie de página sigue listando todas las páginas del sitio, incluidas
+// las que ya no están en el menú principal (Modelo educativo, Trabaja con
+// nosotros) — siguen siendo accesibles, solo dejaron de ser navegación
+// primaria.
 export const FOOTER_LINKS: NavLink[] = [
   { label: "Nosotros", href: "/nosotros" },
   { label: "Modelo educativo", href: "/modelo-educativo" },

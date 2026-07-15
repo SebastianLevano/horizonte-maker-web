@@ -1,38 +1,45 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { Hero } from "@/components/hero";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { ProcessSequence } from "@/components/process-sequence";
-import { FaqAccordion } from "@/components/faq-accordion";
 import { LevelCard } from "@/components/cards/level-card";
 import { InfoRequestForm } from "@/components/forms/info-request-form";
 import { VisitForm } from "@/components/forms/visit-form";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { CONTENT_ICONS } from "@/components/icons";
 import {
   ADMISSION_PROCESS,
   ADMISSION_CLOSING,
-  ADMISSION_PRICING,
   ADMISSION_REQUIREMENTS,
   ADMISSION_DATES,
-  ADMISSION_BENEFITS,
-  RESERVATION_POLICY,
 } from "@/data/site";
 import { LEVELS } from "@/data/levels";
-import { ADMISSION_FAQ } from "@/data/faq";
 import { IMAGES } from "@/data/images";
-import { CONTENT_ICONS } from "@/components/icons";
 import { buildMetadata } from "@/lib/seo";
-import { FaqJsonLd } from "@/components/json-ld";
-
-const PENSION_INSTALLMENTS = 10;
 
 export const metadata: Metadata = buildMetadata("/admision");
+
+const MORE_ABOUT_ADMISSION = [
+  {
+    title: "Fechas y costos",
+    description: "Matrícula, pensión, beneficios y fechas de la campaña de admisión.",
+    href: "/admision/fechas-y-costos",
+    icon: "calendar" as const,
+  },
+  {
+    title: "Preguntas frecuentes",
+    description: "Respuestas a las dudas más comunes sobre el proceso.",
+    href: "/admision/preguntas-frecuentes",
+    icon: "chat" as const,
+  },
+];
 
 export default function AdmisionPage() {
   return (
     <>
-      <FaqJsonLd items={ADMISSION_FAQ} />
       <Hero
-        eyebrow="Admisión"
+        eyebrow="Admisión · Proceso"
         title="Conoce una escuela donde el conocimiento se convierte en acción"
         description={ADMISSION_CLOSING}
         primaryCta={{ label: "Solicitar información", href: "#solicitar-informacion" }}
@@ -96,69 +103,37 @@ export default function AdmisionPage() {
       </Section>
 
       <Section surface>
-        <SectionHeading title="Inversión" />
-        <div className="grid gap-4 sm:grid-cols-2 max-w-2xl">
-          <div className="rounded-md border border-border bg-white p-5">
-            <p className="font-mono text-xs uppercase tracking-[0.06em] text-secondary">Matrícula</p>
-            <p className="mt-1 text-2xl font-semibold text-text">{ADMISSION_PRICING.matricula}</p>
-          </div>
-          <div className="rounded-md border border-border bg-white p-5">
-            <p className="font-mono text-xs uppercase tracking-[0.06em] text-secondary">Pensión</p>
-            <p className="mt-1 text-2xl font-semibold text-text">{ADMISSION_PRICING.pension}</p>
-            <div className="mt-3 flex gap-1" aria-hidden="true">
-              {Array.from({ length: PENSION_INSTALLMENTS }).map((_, i) => (
-                <span key={i} className="h-1.5 flex-1 rounded-full bg-secondary/30" />
-              ))}
-            </div>
-            <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.04em] text-text-secondary">
-              10 cuotas · marzo a diciembre
-            </p>
-          </div>
-        </div>
-        <p className="mt-4 max-w-2xl text-sm text-text-secondary">{ADMISSION_PRICING.note}</p>
-        <div className="mt-6">
-          <p className="font-mono text-xs uppercase tracking-[0.06em] text-secondary">Beneficios</p>
-          <ul className="mt-3 grid gap-2.5 sm:grid-cols-3">
-            {ADMISSION_BENEFITS.map((b) => (
-              <li key={b} className="flex items-start gap-2 rounded-md border border-border bg-white p-3 text-sm text-text-secondary">
-                <svg className="mt-0.5 h-4 w-4 flex-shrink-0 text-secondary" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-                {b}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <p className="mt-6 max-w-2xl text-xs text-text-secondary">{RESERVATION_POLICY}</p>
-      </Section>
-
-      <Section tint="primary">
-        <SectionHeading title="Fechas de campaña" />
-        <div className="grid gap-4 sm:grid-cols-2 max-w-2xl">
-          {[
-            { label: "Campaña de admisión", text: ADMISSION_DATES.campaign },
-            { label: "Apertura del campus", text: ADMISSION_DATES.openingYear },
-          ].map((d) => {
-            const Icon = CONTENT_ICONS.calendar;
+        <SectionHeading title="Más sobre el proceso de admisión" />
+        <div className="grid gap-4 sm:grid-cols-2">
+          {MORE_ABOUT_ADMISSION.map((item, i) => {
+            const Icon = CONTENT_ICONS[item.icon];
             return (
-              <ScrollReveal key={d.label}>
-                <div className="rounded-md border border-border bg-white p-6">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-md bg-primary/10 text-primary">
+              <ScrollReveal key={item.title} delay={i * 70}>
+                <Link
+                  href={item.href}
+                  className="group flex items-center gap-4 rounded-md border border-border bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]"
+                >
+                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
                     <Icon />
                   </span>
-                  <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.06em] text-secondary">{d.label}</p>
-                  <p className="mt-1 text-text">{d.text.split(": ").slice(1).join(": ")}</p>
-                </div>
+                  <div className="flex-1">
+                    <p className="font-semibold text-text">{item.title}</p>
+                    <p className="mt-1 text-sm text-text-secondary">{item.description}</p>
+                  </div>
+                  <svg
+                    className="h-5 w-5 flex-shrink-0 text-text-secondary transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
               </ScrollReveal>
             );
           })}
-        </div>
-      </Section>
-
-      <Section surface>
-        <SectionHeading title="Preguntas frecuentes" />
-        <div className="max-w-2xl">
-          <FaqAccordion items={ADMISSION_FAQ} />
         </div>
       </Section>
 

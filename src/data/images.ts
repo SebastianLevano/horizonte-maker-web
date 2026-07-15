@@ -134,6 +134,7 @@ export const IMAGES = {
   distritoMakerSeguridad: G_SEGURIDAD,
   nosotrosInstalaciones: J_CAMPUS_FACHADA,
   nosotrosPerfilEstudiante: K_PERFIL_ESTUDIANTE,
+  nosotrosHistoria: F_TALLER_FABRICACION,
 
   // Miniaturas de nivel: se muestran JUNTAS en Inicio y en el índice de
   // Niveles, así que las tres deben ser mutuamente distintas.
@@ -174,6 +175,12 @@ export const IMAGES = {
   // Apoyo visual en el cuerpo de página (antes solo tenían foto de hero).
   familiasAcompanamiento: E_DOCENTE,
   trabajaConNosotrosEquipo: F_TALLER_FABRICACION,
+
+  // Nosotros e Infraestructura e Historia pasaron de ser secciones de una
+  // sola página a páginas propias (/nosotros/infraestructura,
+  // /nosotros/historia) — cada una con su propio hero.
+  admisionFechasCostos: I_ADMISION_DETALLE,
+  admisionFaq: K_PERFIL_ESTUDIANTE,
 } satisfies Record<string, SiteImage | string | Record<string, SiteImage>>;
 
 // Reexport individual para armar evidence.ts con las mismas constantes.
