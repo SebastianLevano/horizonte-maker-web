@@ -125,11 +125,11 @@ export const ADMISSION_PROCESS = [
   },
 ] as const;
 
-// Vista previa — montos ilustrativos, no aprobados. El brief pide
-// expresamente no anticipar cifras reales hasta que estén confirmadas.
+// Matrícula confirmada por el colegio. La pensión varía por nivel — ver
+// el campo "pension" de cada nivel en levels.ts.
 export const ADMISSION_PRICING = {
-  matricula: "S/ 1,200",
-  pension: "S/ 850 al mes, en 10 cuotas (marzo a diciembre)",
+  matricula: "S/ 200",
+  installments: "10 cuotas, de marzo a diciembre",
   note: "Incluye materiales del Distrito Maker. No incluye uniforme ni alimentación.",
 };
 

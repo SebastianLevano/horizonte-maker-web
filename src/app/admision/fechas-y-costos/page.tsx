@@ -10,12 +10,11 @@ import {
   ADMISSION_BENEFITS,
   RESERVATION_POLICY,
 } from "@/data/site";
+import { LEVELS, LEVEL_ACCENT_CLASSES } from "@/data/levels";
 import { IMAGES } from "@/data/images";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata("/admision/fechas-y-costos");
-
-const PENSION_INSTALLMENTS = 10;
 
 export default function FechasYCostosPage() {
   return (
@@ -29,24 +28,28 @@ export default function FechasYCostosPage() {
 
       <Section>
         <SectionHeading title="Inversión" />
-        <div className="grid gap-4 sm:grid-cols-2 max-w-2xl">
-          <div className="rounded-md border border-border bg-white p-5">
-            <p className="font-mono text-xs uppercase tracking-[0.06em] text-secondary">Matrícula</p>
-            <p className="mt-1 text-2xl font-semibold text-text">{ADMISSION_PRICING.matricula}</p>
-          </div>
-          <div className="rounded-md border border-border bg-white p-5">
-            <p className="font-mono text-xs uppercase tracking-[0.06em] text-secondary">Pensión</p>
-            <p className="mt-1 text-2xl font-semibold text-text">{ADMISSION_PRICING.pension}</p>
-            <div className="mt-3 flex gap-1" aria-hidden="true">
-              {Array.from({ length: PENSION_INSTALLMENTS }).map((_, i) => (
-                <span key={i} className="h-1.5 flex-1 rounded-full bg-secondary/30" />
-              ))}
-            </div>
-            <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.04em] text-text-secondary">
-              10 cuotas · marzo a diciembre
-            </p>
-          </div>
+        <div className="max-w-xs rounded-md border border-border bg-white p-5">
+          <p className="font-mono text-xs uppercase tracking-[0.06em] text-secondary">Matrícula</p>
+          <p className="mt-1 text-2xl font-semibold text-text">{ADMISSION_PRICING.matricula}</p>
+          <p className="mt-1 text-xs text-text-secondary">Pago único, al momento de la matrícula.</p>
         </div>
+
+        <p className="mt-8 font-mono text-xs uppercase tracking-[0.06em] text-secondary">
+          Pensión mensual por nivel
+        </p>
+        <div className="mt-3 grid gap-4 sm:grid-cols-3">
+          {LEVELS.map((level) => {
+            const accent = LEVEL_ACCENT_CLASSES[level.slug];
+            return (
+              <div key={level.slug} className={`rounded-md border border-border border-t-2 bg-white p-5 ${accent.borderTop}`}>
+                <p className={`font-mono text-xs uppercase tracking-[0.06em] ${accent.text}`}>{level.name}</p>
+                <p className="mt-1 text-2xl font-semibold text-text">{level.pension}</p>
+                <p className="mt-1 text-xs text-text-secondary">al mes</p>
+              </div>
+            );
+          })}
+        </div>
+        <p className="mt-3 max-w-2xl text-sm text-text-secondary">{ADMISSION_PRICING.installments}.</p>
         <p className="mt-4 max-w-2xl text-sm text-text-secondary">{ADMISSION_PRICING.note}</p>
         <div className="mt-6">
           <p className="font-mono text-xs uppercase tracking-[0.06em] text-secondary">Beneficios</p>

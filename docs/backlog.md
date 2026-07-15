@@ -21,7 +21,7 @@ A pedido explícito, el sitio se llenó por completo con datos de formato real (
 | WhatsApp, teléfono, correo, horario | `src/data/site.ts` → `SITE.contact` | Datos oficiales (ítem 7) |
 | Redes sociales | `src/data/site.ts` → `SITE.social` | Cuentas reales, si existen |
 | Historia del proyecto | `src/data/site.ts` → `HISTORY` | Texto entregado por el colegio (ítem 10) |
-| Matrícula, pensión, becas, política de reserva | `src/data/site.ts` → `ADMISSION_PRICING`, `ADMISSION_BENEFITS`, `RESERVATION_POLICY` | Montos aprobados por administración |
+| Becas, política de reserva | `src/data/site.ts` → `ADMISSION_BENEFITS`, `RESERVATION_POLICY` | Montos aprobados por administración. Matrícula (`ADMISSION_PRICING.matricula`) y pensión por nivel (`src/data/levels.ts` → `pension`) ya confirmadas; falta confirmar el número de cuotas (`ADMISSION_PRICING.installments`, aún asumido en 10, marzo–diciembre) |
 | Requisitos, fechas de campaña, año de apertura | `src/data/site.ts` → `ADMISSION_REQUIREMENTS`, `ADMISSION_DATES` | Datos confirmados de admisión |
 | Ejemplos de aula por pilar pedagógico | `src/data/model.ts` → `classroomExample` | Validación de coordinación académica (ítem 29) |
 | Descripción de "Comunidad Maker" | `src/data/levels.ts` (Primaria) | Contenido oficial del nivel |

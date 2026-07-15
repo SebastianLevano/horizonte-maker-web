@@ -11,6 +11,8 @@ export type Level = {
   sectionSize: string;
   /** Horario de clases, decisión institucional confirmada (brief). */
   schedule: string;
+  /** Pensión mensual, decisión institucional confirmada (brief). */
+  pension: string;
   centralMessage: string;
   summary: string;
   features: { title: string; description: string }[];
@@ -46,6 +48,7 @@ export const LEVELS: Level[] = [
     grades: "3 grados",
     sectionSize: "15 estudiantes por sección",
     schedule: "8:30 a. m. – 12:30 p. m.",
+    pension: "S/ 500",
     centralMessage:
       "Aprender mediante juego, movimiento, exploración, proyectos y expresión.",
     summary:
@@ -91,6 +94,7 @@ export const LEVELS: Level[] = [
     grades: "6 grados",
     sectionSize: "25 estudiantes por sección",
     schedule: "7:30 a. m. – 2:45 p. m.",
+    pension: "S/ 550",
     centralMessage:
       "Conectar los aprendizajes académicos con proyectos y soluciones concretas.",
     summary:
@@ -136,6 +140,7 @@ export const LEVELS: Level[] = [
     grades: "1.° a 5.° grado",
     sectionSize: "25 estudiantes por sección",
     schedule: "7:30 a. m. – 3:15 p. m.",
+    pension: "S/ 600",
     centralMessage:
       "Integrar rigor académico, orientación vocacional y formación técnica progresiva.",
     summary:

@@ -16,7 +16,7 @@ export const ADMISSION_FAQ: FaqItem[] = [
   {
     question: "¿Cuánto cuesta la matrícula y la pensión?",
     answer:
-      "La matrícula es de S/ 1,200 y la pensión de S/ 850 mensuales, en 10 cuotas de marzo a diciembre. Incluye materiales del Distrito Maker; no incluye uniforme ni alimentación.",
+      "La matrícula (inscripción) es de S/ 200. La pensión mensual varía según el nivel: S/ 500 en Inicial, S/ 550 en Primaria y S/ 600 en Secundaria, en 10 cuotas de marzo a diciembre. Incluye materiales del Distrito Maker; no incluye uniforme ni alimentación.",
   },
   {
     question: "¿Hay vacantes disponibles para este año?",
