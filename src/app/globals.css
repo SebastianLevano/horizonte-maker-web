@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+/*
+  Tokens de docs/design-system.md.
+  El sitio institucional no ofrece modo oscuro: el brief exige que el blanco
+  domine la interfaz como parte de la identidad de marca.
+*/
+:root {
+  --primary: #1b4332;
+  --primary-hover: #2d6a4f;
+  --secondary: #40916c;
+  --accent: #74c69d;
+
+  --background: #ffffff;
+  --surface: #f8f9fa;
+
+  --border: #e9ecef;
+  --border-strong: #868e96;
+
+  --text: #212529;
+  --text-secondary: #5c636a;
+
+  --success: #2d6a4f;
+  --error: #b3261e;
+  --warning: #a15c07;
+
+  /* Acentos temáticos por ruta Maker y por nivel (docs/backlog.md #38),
+     auditados WCAG >=4.5:1 sobre blanco. Se usan en chips de ícono, borde
+     superior y badges — nunca como fondo de sección completa: el blanco
+     sigue dominando la interfaz. */
+  --route-robotica: #2563eb;
+  --route-robotica-tint: #eff4ff;
+  --route-diseno: #b45309;
+  --route-diseno-tint: #fff7ed;
+  --route-gastronomia: #c2410c;
+  --route-gastronomia-tint: #fff4ed;
+  --route-construccion: #92660d;
+  --route-construccion-tint: #fefaeb;
+
+  --level-inicial: #c0392b;
+  --level-inicial-tint: #fdeeec;
+  --level-primaria: #0f766e;
+  --level-primaria-tint: #ecfdf9;
+  --level-secundaria: #4338ca;
+  --level-secundaria-tint: #eef0fd;
+
+  --radius-sm-base: 4px;
+  --radius-md-base: 8px;
+  --radius-full-base: 9999px;
+
+  /* Escala de sombra "flotante": reservada a elementos que deliberadamente
+     se despegan del layout (tarjetas superpuestas, hover de tarjetas
+     interactivas, carrusel). El resto del sistema sigue plano. */
+  --shadow-float: 0 8px 24px -4px rgba(27, 67, 50, 0.14), 0 2px 6px -2px rgba(27, 67, 50, 0.08);
+  --shadow-float-lg: 0 20px 48px -12px rgba(27, 67, 50, 0.22), 0 6px 16px -4px rgba(27, 67, 50, 0.1);
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-warning: var(--warning);
+
+  --color-route-robotica: var(--route-robotica);
+  --color-route-robotica-tint: var(--route-robotica-tint);
+  --color-route-diseno: var(--route-diseno);
+  --color-route-diseno-tint: var(--route-diseno-tint);
+  --color-route-gastronomia: var(--route-gastronomia);
+  --color-route-gastronomia-tint: var(--route-gastronomia-tint);
+  --color-route-construccion: var(--route-construccion);
+  --color-route-construccion-tint: var(--route-construccion-tint);
+
+  --color-level-inicial: var(--level-inicial);
+  --color-level-inicial-tint: var(--level-inicial-tint);
+  --color-level-primaria: var(--level-primaria);
+  --color-level-primaria-tint: var(--level-primaria-tint);
+  --color-level-secundaria: var(--level-secundaria);
+  --color-level-secundaria-tint: var(--level-secundaria-tint);
+
+  --font-display: var(--font-bricolage), "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: var(--font-plex-sans), "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+
+  --radius-sm: var(--radius-sm-base);
+  --radius-md: var(--radius-md-base);
+  --radius-full: var(--radius-full-base);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1, h2 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+h3, h4 {
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+/* Foco visible de dos tonos: legible sobre fondo blanco y sobre verde oscuro. */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 4px #ffffff, 0 0 0 5px var(--primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utilidad de scroll-reveal: JS agrega .is-visible al entrar al viewport. */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 250ms ease-out, transform 250ms ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Anillo de pulso del botón de WhatsApp: señala disponibilidad, no decora. */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.pulse-ring {
+  animation: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
+
+/* Flotación muy sutil para la tarjeta superpuesta del hero. */
+@keyframes float-idle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float-idle {
+  animation: float-idle 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-ring,
+  .animate-float-idle {
+    animation: none;
+  }
+}
+
+/* Entrada de cada diapositiva del carrusel: una animación (no transición)
+   porque se dispara al remontar el nodo (key change), no al cambiar estado
+   sobre un nodo ya pintado. */
+@keyframes fade-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-enter {
+  animation: fade-slide-in 350ms ease-out;
+}
+
+/* Barra de progreso tipo "historia" del badge flotante del hero: el
+   llenado en curso es lo que comunica "esto rota solo" — patrón ya
+   reconocible de redes sociales. */
+@keyframes story-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.story-progress-bar {
+  width: 0%;
+  animation: story-progress 4000ms linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-enter,
+  .story-progress-bar {
+    animation: none;
+  }
+}
